@@ -1,3 +1,35 @@
-[gd_scene format=3 uid="uid://by7d4vxbw0jng"]
+[gd_scene load_steps=6 format=3 uid="uid://by7d4vxbw0jng"]
+
+[ext_resource type="Script" uid="uid://crsra03sh7bwt" path="res://scripts/components/pile.gd" id="1_ve17u"]
+[ext_resource type="Shader" uid="uid://b5yqu0aiwskx8" path="res://scripts/utils/outline.gdshader" id="2_48kx7"]
+[ext_resource type="Texture2D" uid="uid://hyy0nsgcehvr" path="res://assets/graphics/cards/EMPTY.png" id="2_ve17u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ve17u"]
+size = Vector2(62, 90)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_706tr"]
+shader = ExtResource("2_48kx7")
+shader_parameter/color = Color(0.294118, 0.415686, 1, 1)
+shader_parameter/alpha = 0.0
+shader_parameter/width = 2.0
+shader_parameter/pattern = 2
+shader_parameter/inside = true
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
 
 [node name="Pile" type="Node2D"]
+script = ExtResource("1_ve17u")
+
+[node name="ClickableArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableArea"]
+position = Vector2(-9.53674e-07, 1.84774e-06)
+shape = SubResource("RectangleShape2D_ve17u")
+
+[node name="Image" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_706tr")
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("2_ve17u")
+
+[connection signal="mouse_entered" from="ClickableArea" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ClickableArea" to="." method="_on_mouse_exited"]
