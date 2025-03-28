@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cb3j64da8cyl5"]
+
+[ext_resource type="Script" uid="uid://bnhntvf0ucfnr" path="res://scripts/components/card_slot.gd" id="1_tdtjo"]
+[ext_resource type="Texture2D" uid="uid://hyy0nsgcehvr" path="res://assets/graphics/cards/EMPTY.png" id="2_tdtjo"]
+[ext_resource type="Shader" uid="uid://b5yqu0aiwskx8" path="res://scripts/utils/outline.gdshader" id="2_xiqnq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tdtjo"]
+size = Vector2(27.5556, 40)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hvbpl"]
+shader = ExtResource("2_xiqnq")
+shader_parameter/color = Color(0.294118, 0.415686, 1, 1)
+shader_parameter/alpha = 0.0
+shader_parameter/width = 2.0
+shader_parameter/pattern = 2
+shader_parameter/inside = true
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
+
+[node name="CardSlot" type="Node2D"]
+script = ExtResource("1_tdtjo")
+
+[node name="ClickableArea" type="Area2D" parent="."]
+scale = Vector2(1.5, 1.5)
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableArea"]
+position = Vector2(6.35783e-07, -7.94729e-07)
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_tdtjo")
+
+[node name="Image" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_hvbpl")
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("2_tdtjo")
+
+[connection signal="area_entered" from="ClickableArea" to="." method="_on_area_entered"]
+[connection signal="area_exited" from="ClickableArea" to="." method="_on_area_exited"]
+[connection signal="mouse_entered" from="ClickableArea" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ClickableArea" to="." method="_on_mouse_exited"]
