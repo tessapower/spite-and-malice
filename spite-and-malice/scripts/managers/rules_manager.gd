@@ -1,9 +1,20 @@
 extends Node
 
-## rules_manager.gd: This script helps to enforce the rules of the game through
+## rules_manager.gd: helps to enforce the rules of the game through
 ## functions which can be used to check if a card is playable.
 ##
 ## Author(s): Tessa Power
+
+var legal_move_color: Color = Color(0.0, 1.0, 0.0)
+var illegal_move_color: Color = Color(1.0, 0.0, 0.0)
+
+const legal_moves: Dictionary = {
+    Pile.Type.DISCARD_PILE: [Pile.Type.PLAY_PILE],
+    Pile.Type.DRAW_PILE: [Pile.Type.IN_HAND],
+    Pile.Type.GOAL_PILE: [Pile.Type.PLAY_PILE],
+    Pile.Type.IN_HAND: [Pile.Type.PLAY_PILE, Pile.Type.DISCARD_PILE],
+    Pile.Type.PLAY_PILE: []
+}
 
 # Rules of Spite and Malice:
 # The object of the game is to be the first to get rid of all cards in the
