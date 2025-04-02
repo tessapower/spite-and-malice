@@ -47,6 +47,14 @@ func _process(_delta) -> void:
             $CardImage.texture = load(_image_path(suit, rank))
 
 
+func highlight_on(color: Color) -> void:
+    modulate = color
+
+
+func highlight_off() -> void:
+    modulate = Color(1.0, 1.0, 1.0)
+
+
 func hover(should_highlight: bool) -> void:
     scale = HOVERED_SCALE if should_highlight else NORMAL_SCALE
     z_index = HOVERED_Z_IDX if should_highlight else NORMAL_Z_IDX

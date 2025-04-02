@@ -5,17 +5,6 @@ extends Node
 ##
 ## Author(s): Tessa Power
 
-var legal_move_color: Color = Color(0.0, 1.0, 0.0)
-var illegal_move_color: Color = Color(1.0, 0.0, 0.0)
-
-const legal_moves: Dictionary = {
-    Pile.Type.DISCARD_PILE: [Pile.Type.PLAY_PILE],
-    Pile.Type.DRAW_PILE: [Pile.Type.IN_HAND],
-    Pile.Type.GOAL_PILE: [Pile.Type.PLAY_PILE],
-    Pile.Type.IN_HAND: [Pile.Type.PLAY_PILE, Pile.Type.DISCARD_PILE],
-    Pile.Type.PLAY_PILE: []
-}
-
 # Rules of Spite and Malice:
 # The object of the game is to be the first to get rid of all cards in the
 # goal pile (A.K.A. pay-off pile) by placing them on the play piles
@@ -45,3 +34,18 @@ const legal_moves: Dictionary = {
 # their discard piles. Each player has a maximum of four discard piles, and may
 # place cards on discard piles in any order.
 #
+
+const legal_move_color: Color = Color(0.275, 0.733, 0.529)
+const illegal_move_color: Color = Color(0.986, 0.435, 0.435)
+
+# Source Pile Type: Legal Destinations
+const legal_moves: Dictionary = {
+    Pile.Type.DISCARD_PILE: [Pile.Type.PLAY_PILE],
+    Pile.Type.DRAW_PILE: [Pile.Type.IN_HAND],
+    Pile.Type.GOAL_PILE: [Pile.Type.PLAY_PILE],
+    Pile.Type.IN_HAND: [Pile.Type.PLAY_PILE, Pile.Type.DISCARD_PILE],
+    Pile.Type.PLAY_PILE: []
+}
+
+func is_legal_move(card: Card, destination) -> bool:
+    return false

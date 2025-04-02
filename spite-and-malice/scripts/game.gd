@@ -66,6 +66,8 @@ func _input(event) -> void:
 func move_card_between_piles(card: Card, destination: CardSlot) -> void:
     card.parent.remove_card()
     destination.set_card(card)
+    # Stop highlighting the card
+    card.highlight_off()
 
 
 func start_dragging_card(mouse_pos: Vector2) -> void:

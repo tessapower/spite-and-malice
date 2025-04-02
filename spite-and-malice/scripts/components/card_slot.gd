@@ -4,8 +4,8 @@ extends Node2D
 ## card_slot.gd: represents a slot where a card can be. Can only hold one card
 ## at a time.
 
-@export var card: Card = null
 @export var selectable: bool = true
+var card: Card = null
 var selected: bool = false
 
 
@@ -48,10 +48,12 @@ func _on_area_entered(area: Area2D) -> void:
         # TODO: Remove card == null when converting to pile with multiple cards
         if GameState.selected_card && card == null:
             # TODO: check if legal move
-            # If yes, highlight green set this as dest_pile
-            print("Do some rule checking here, highlight ")
-            GameState.dest_pile = self
+            if RulesManager.is_legal_move(GameState.selected_card, self):
+                GameState.dest_pile = self
+                c.highlight_on(RulesManager.legal_move_color)
             # If no, highlight red
+            else:
+                c.highlight_on(RulesManager.illegal_move_color)
 
 
 func _on_area_exited(area: Area2D) -> void:
@@ -59,3 +61,5 @@ func _on_area_exited(area: Area2D) -> void:
     # If we set this slot as the destination, unset it
     if c && GameState.dest_pile == self:
         GameState.dest_pile = null
+
+    c.highlight_off()
