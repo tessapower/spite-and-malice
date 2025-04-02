@@ -21,7 +21,9 @@ func add_to_hand(card: Card) -> bool:
     # Sort cards
     cards.sort_custom(_sort_by_rank)
     for i in range(cards.size()):
-        card_slots[i].set_card(cards[i])
+        var card_slot: CardSlot = card_slots[i]
+        card_slot.remove_card()
+        card_slot.set_card(cards[i])
 
     return true
 
