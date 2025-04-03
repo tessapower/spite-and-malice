@@ -82,13 +82,10 @@ func _on_mouse_exited() -> void:
 func _on_area_entered(area: Area2D) -> void:
     var c := area.get_parent() as Card
     if c:
-        # TODO: Remove card == null when converting to pile with multiple cards
         if GameState.selected_card:
-            # TODO: check if legal move
             if RulesManager.is_legal_move(GameState.selected_card, self):
                 GameState.dest_pile = self
                 c.highlight_on(RulesManager.legal_move_color)
-            # If no, highlight red
             else:
                 c.highlight_on(RulesManager.illegal_move_color)
 
