@@ -21,8 +21,7 @@ const NORMAL_Z_IDX: int = 2
 const HOVERED_SCALE: Vector2 = Vector2(1.05, 1.05)
 const HOVERED_Z_IDX: int = 3
 const DRAG_SCALE: Vector2 = Vector2(1.0, 1.0)
-const DRAG_Z_IDX: int = 4
-const image = preload("res://assets/graphics/cards/BACK.png")
+const DRAG_Z_IDX: int = RenderingServer.CANVAS_ITEM_Z_MAX
 
 func _ready() -> void:
     z_index = NORMAL_Z_IDX
