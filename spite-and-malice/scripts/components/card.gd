@@ -14,6 +14,7 @@ var rank: Rank = Rank.ACE
 var suit: Suit = Suit.SPADES
 var selectable: bool = false
 var parent = null
+var original_pos: Vector2 = Vector2(0.0, 0.0)
 
 # Card constants
 const NORMAL_SCALE: Vector2 = Vector2(1.0, 1.0)
@@ -31,13 +32,6 @@ func _ready() -> void:
 func init(card_rank: Rank, card_suit: Suit):
     suit = card_suit
     rank = card_rank
-
-
-func set_parent(new_parent) -> void:
-    parent = new_parent
-    if new_parent != null:
-        position = parent.position
-        move_to_parent_position()
 
 
 func _process(_delta) -> void:
@@ -95,8 +89,7 @@ func _to_string() -> String:
     return str("rank: ", rank, ", suit: ", suit)
 
 
-# TODO: rename to return_to_pile() after refactoring
-func move_to_parent_position() -> void:
+func return_to_pile() -> void:
     if parent:
         var tween = get_tree().create_tween()
-        tween.tween_property(self, "position", parent.position, 0.1)
+        tween.tween_property(self, "position", original_pos, 0.1)

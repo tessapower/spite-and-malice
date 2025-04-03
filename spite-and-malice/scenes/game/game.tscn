@@ -18,22 +18,26 @@ script = ExtResource("1_sul5r")
 position = Vector2(672, 176)
 rank_order = true
 selectable = false
+CARD_VERTICAL_OFFSET = Vector2(0, -2)
 type = 1
 
 [node name="Pile1" parent="PlayPiles" instance=ExtResource("3_0sr1o")]
 position = Vector2(864, 176)
 rank_order = true
 selectable = false
+CARD_VERTICAL_OFFSET = Vector2(0, -2)
 type = 1
 
 [node name="Pile2" parent="PlayPiles" instance=ExtResource("3_0sr1o")]
 position = Vector2(1056, 176)
 rank_order = true
 selectable = false
+CARD_VERTICAL_OFFSET = Vector2(0, -2)
 type = 1
 
 [node name="Pile3" parent="PlayPiles" instance=ExtResource("3_0sr1o")]
 position = Vector2(1248, 176)
 rank_order = true
 selectable = false
+CARD_VERTICAL_OFFSET = Vector2(0, -2)
 type = 1

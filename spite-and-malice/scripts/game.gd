@@ -61,7 +61,7 @@ func _input(event) -> void:
                 GameState.deselect_card()
                 GameState.dest_pile = null
             else: # Return the card to the pile it came from
-                GameState.selected_card.move_to_parent_position()
+                GameState.selected_card.return_to_pile()
                 GameState.deselect_card()
 
 
@@ -71,8 +71,10 @@ func move_card_to(card: Card, destination) -> void:
 
     if destination is CardSlot:
         destination.set_card(card)
+        card.return_to_pile()
     elif destination is Pile:
         destination.add(card)
+        card.return_to_pile()
 
     # Stop highlighting the card
     card.highlight_off()

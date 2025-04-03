@@ -17,7 +17,9 @@ func set_card(c: Card) -> void:
 
     card = c
     card.selectable = true
-    card.set_parent(self)
+    card.parent = self
+    card.original_pos = position
+    card.position = position
 
 
 # Removes the card from this card slot and unassigns itself as the card's parent
@@ -26,7 +28,7 @@ func remove_card() -> void:
     if card == null: return
 
     card.selectable = false
-    card.set_parent(null)
+    card.parent = null
     card = null
 
 

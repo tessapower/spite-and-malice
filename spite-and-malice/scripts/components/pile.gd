@@ -9,6 +9,9 @@ extends Node
 @export var accepts_cards: bool = true
 # Whether this pile is selectable by the player.
 @export var selectable: bool = true
+# Whether cards underneath the top card are visible
+@export var show_cards_in_pile: bool = false
+@export var CARD_VERTICAL_OFFSET: Vector2 = Vector2(0.0, 18.0)
 
 enum Type { DRAW_PILE, PLAY_PILE, GOAL_PILE, DISCARD_PILE }
 @export var type: Type = Type.DRAW_PILE
@@ -33,10 +36,17 @@ func is_empty() -> bool:
 func add(c: Card) -> void:
     if is_empty() || !rank_order || (rank_order && c.rank > cards.peek().rank):
         c.selectable = selectable
-        c.set_parent(self)
+        c.parent = self
+
         # Set newly pushed card's z ordering so that it appears on the top
         # of the stack
-        if !is_empty(): c.z_index = cards.peek().z_index + 1
+        if !is_empty():
+            c.z_index = cards.peek().z_index + 1
+
+        # Set position based on position in pile
+        var pos: Vector2 = (cards.size() * CARD_VERTICAL_OFFSET)
+        c.original_pos = self.position + pos
+        c.position = self.position + pos
         cards.push(c)
 
 
@@ -55,6 +65,7 @@ func pop_top_card() -> Card:
 
     var card = cards.pop()
     card.z_index = Card.NORMAL_Z_IDX
+
 
     return card
 
