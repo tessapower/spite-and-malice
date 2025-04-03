@@ -10,8 +10,9 @@ extends Node
 # Whether this pile is selectable by the player.
 @export var selectable: bool = true
 
-enum Type { DRAW_PILE, PLAY_PILE, GOAL_PILE, DISCARD_PILE, IN_HAND, NONE }
-@export var type: Type = Type.NONE
+enum Type { DRAW_PILE, PLAY_PILE, GOAL_PILE, DISCARD_PILE }
+@export var type: Type = Type.DRAW_PILE
+const empty_image = preload("res://assets/graphics/cards/EMPTY.png")
 
 # TODO: introduce per instance rules
 
@@ -32,29 +33,19 @@ func is_empty() -> bool:
 
 
 ## Adds a card to this pile, returns whether adding the card was successful.
-func add(c: Card) -> bool:
-    if !accepts_cards:
-        return false
-
-    if cards.is_empty():
-        c.selectable = true
+func add(c: Card) -> void:
+    if is_empty() || !rank_order || (rank_order && c.rank > cards.peek().rank):
+        c.selectable = selectable
+        c.set_parent(self)
+        # Set newly pushed card's z ordering so that it appears on the top
+        # of the stack
+        if !is_empty(): c.z_index = cards.peek().z_index + 1
         cards.push(c)
-
-    if rank_order:
-        if c > cards.peek():
-            # Set current top card as not selectable
-            cards.peek().selectable = false
-            # Set new top card as selectable
-            c.selectable = true
-            cards.push(c)
-            return true
-
-    return false
 
 
 ## Peeks at the top card from this pile without removing it
 func peek_top_card() -> Card:
-    if cards.is_empty():
+    if is_empty():
         return null
 
     return cards.peek()
@@ -62,17 +53,13 @@ func peek_top_card() -> Card:
 
 ## Removes and returns the top card from this pile
 func pop_top_card() -> Card:
-    if cards.is_empty():
+    if is_empty():
         return null
 
-    var top_card = cards.pop()
-    # Set removed top card as not selectable
-    top_card.selectable = false
-    # Set new top card as selectable
-    cards.peek().selectable = true
+    var card = cards.pop()
+    card.z_index = Card.NORMAL_Z_IDX
 
-    return top_card
-
+    return card
 
 
 ## Returns whether this pile enforces rank ordering
@@ -81,9 +68,35 @@ func enforces_rank_order() -> bool:
 
 
 func _on_mouse_entered() -> void:
-    pass # Replace with function body.
-
+    var can_pick_up_card = selectable && GameState.selected_card == null && !cards.is_empty()
+    if can_pick_up_card:
+        # Visually show that the card can be picked up
+        cards.peek().hover(true)
 
 
 func _on_mouse_exited() -> void:
-    pass # Replace with function body.
+    if selectable && !cards.is_empty():
+        cards.peek().hover(false)
+
+
+func _on_area_entered(area: Area2D) -> void:
+    var c := area.get_parent() as Card
+    if c:
+        # TODO: Remove card == null when converting to pile with multiple cards
+        if GameState.selected_card:
+            # TODO: check if legal move
+            if RulesManager.is_legal_move(GameState.selected_card, self):
+                GameState.dest_pile = self
+                c.highlight_on(RulesManager.legal_move_color)
+            # If no, highlight red
+            else:
+                c.highlight_on(RulesManager.illegal_move_color)
+
+
+func _on_area_exited(area: Area2D) -> void:
+    var c := area.get_parent() as Card
+    # If we set this slot as the destination, unset it
+    if c && GameState.dest_pile == self:
+        GameState.dest_pile = null
+
+    c.highlight_off()
