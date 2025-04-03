@@ -42,8 +42,11 @@ const illegal_move_color: Color = Color(0.986, 0.435, 0.435)
 func is_legal_move(card: Card, destination: Pile) -> bool:
     var source = card.parent
 
-    if destination.enforces_rank_order() && !destination.is_empty():
-        return card.rank > destination.peek_top_card().rank
+    if destination.enforces_rank_order():
+        if !destination.is_empty():
+            return card.rank > destination.peek_top_card().rank
+        else:
+            return card.rank == Card.Rank.ACE
 
     if source is CardSlot:
         return destination.type == Pile.Type.PLAY_PILE \
