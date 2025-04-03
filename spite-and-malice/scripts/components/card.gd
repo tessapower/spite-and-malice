@@ -34,9 +34,9 @@ func init(card_rank: Rank, card_suit: Suit):
     rank = card_rank
 
 
-func set_parent(card_slot: CardSlot) -> void:
-    parent = card_slot
-    if card_slot != null:
+func set_parent(new_parent) -> void:
+    parent = new_parent
+    if new_parent != null:
         position = parent.position
         move_to_parent_position()
 

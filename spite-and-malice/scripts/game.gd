@@ -54,8 +54,10 @@ func _input(event) -> void:
         dragging = false
         if GameState.selected_card: # If we are dragging a card
             GameState.selected_card.drag(dragging)
-            if GameState.dest_pile: # and we're holding it over a pile
-                move_card_between_piles(GameState.selected_card, GameState.dest_pile)
+            # dest_pile will be populated when we're holding a selected card
+            # over a pile that is a legal move
+            if GameState.dest_pile:
+                move_card_to(GameState.selected_card, GameState.dest_pile)
                 GameState.deselect_card()
                 GameState.dest_pile = null
             else: # Return the card to the pile it came from
@@ -63,9 +65,15 @@ func _input(event) -> void:
                 GameState.deselect_card()
 
 
-func move_card_between_piles(card: Card, destination: CardSlot) -> void:
-    card.parent.remove_card()
-    destination.set_card(card)
+func move_card_to(card: Card, destination) -> void:
+    if card.parent is CardSlot:
+        card.parent.remove_card()
+
+    if destination is CardSlot:
+        destination.set_card(card)
+    elif destination is Pile:
+        destination.add(card)
+
     # Stop highlighting the card
     card.highlight_off()
 

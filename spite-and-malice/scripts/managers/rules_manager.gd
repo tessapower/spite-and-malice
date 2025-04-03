@@ -38,14 +38,20 @@ extends Node
 const legal_move_color: Color = Color(0.275, 0.733, 0.529)
 const illegal_move_color: Color = Color(0.986, 0.435, 0.435)
 
-# Source Pile Type: Legal Destinations
-const legal_moves: Dictionary = {
-    Pile.Type.DISCARD_PILE: [Pile.Type.PLAY_PILE],
-    Pile.Type.DRAW_PILE: [Pile.Type.IN_HAND],
-    Pile.Type.GOAL_PILE: [Pile.Type.PLAY_PILE],
-    Pile.Type.IN_HAND: [Pile.Type.PLAY_PILE, Pile.Type.DISCARD_PILE],
-    Pile.Type.PLAY_PILE: []
-}
 
-func is_legal_move(card: Card, destination) -> bool:
+func is_legal_move(card: Card, destination: Pile) -> bool:
+    var source = card.parent
+
+    if destination.enforces_rank_order() && !destination.is_empty():
+        return card.rank > destination.peek_top_card().rank
+
+    if source is CardSlot:
+        return destination.type == Pile.Type.PLAY_PILE \
+            || destination.type == Pile.Type.DISCARD_PILE
+    elif source is Pile:
+        match source.type:
+            Pile.Type.DISCARD_PILE, Pile.Type.GOAL_PILE:
+                return destination.type == Pile.Type.PLAY_PILE
+            Pile.Type.DRAW_PILE, Pile.Type.PLAY_PILE: return false
+
     return false

@@ -10,7 +10,7 @@ const N_PLAYERS = 2
 
 var selected_card: Card = null
 var selected_card_source = null
-var dest_pile: CardSlot = null
+var dest_pile: Pile = null
 
 
 func select_card(card: Card) -> void:
