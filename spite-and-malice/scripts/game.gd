@@ -41,15 +41,14 @@ func _input(event) -> void:
     if event.is_action_pressed("Left Click"):
         var node = check_for_node()
 
-        # TODO: Refactor to only (de)select cards on left click. Dragging cards
-        # to piles is more intuitive
         if node is CardSlot:
             var card_slot: CardSlot = node
             if card_slot.card:
                 GameState.select_card(card_slot.card)
         elif node is Pile:
-            # TODO: select card
-            return
+            var pile: Pile = node
+            if pile.selectable && !pile.is_empty():
+                GameState.select_card(pile.peek_top_card())
     elif event.is_action_released("Left Click"):
         dragging = false
         if GameState.selected_card: # If we are dragging a card
@@ -68,6 +67,8 @@ func _input(event) -> void:
 func move_card_to(card: Card, destination) -> void:
     if card.parent is CardSlot:
         card.parent.remove_card()
+    elif card.parent is Pile:
+        card.parent.pop_top_card()
 
     if destination is CardSlot:
         destination.set_card(card)
