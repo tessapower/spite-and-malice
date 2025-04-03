@@ -22,7 +22,6 @@ script = ExtResource("1_tdtjo")
 
 [node name="ClickableArea" type="Area2D" parent="."]
 scale = Vector2(1.5, 1.5)
-collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickableArea"]
 position = Vector2(6.35783e-07, -7.94729e-07)
@@ -34,7 +33,5 @@ material = SubResource("ShaderMaterial_hvbpl")
 scale = Vector2(0.33, 0.33)
 texture = ExtResource("2_tdtjo")
 
-[connection signal="area_entered" from="ClickableArea" to="." method="_on_area_entered"]
-[connection signal="area_exited" from="ClickableArea" to="." method="_on_area_exited"]
 [connection signal="mouse_entered" from="ClickableArea" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ClickableArea" to="." method="_on_mouse_exited"]

@@ -40,26 +40,3 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
     if card != null && card.selectable:
         card.hover(false)
-
-
-func _on_area_entered(area: Area2D) -> void:
-    var c := area.get_parent() as Card
-    if c:
-        # TODO: Remove card == null when converting to pile with multiple cards
-        if GameState.selected_card && card == null:
-            # TODO: check if legal move
-            if RulesManager.is_legal_move(GameState.selected_card, self):
-                GameState.dest_pile = self
-                c.highlight_on(RulesManager.legal_move_color)
-            # If no, highlight red
-            else:
-                c.highlight_on(RulesManager.illegal_move_color)
-
-
-func _on_area_exited(area: Area2D) -> void:
-    var c := area.get_parent() as Card
-    # If we set this slot as the destination, unset it
-    if c && GameState.dest_pile == self:
-        GameState.dest_pile = null
-
-    c.highlight_off()
