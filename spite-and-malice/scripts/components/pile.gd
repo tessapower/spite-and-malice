@@ -12,9 +12,6 @@ extends Node
 
 enum Type { DRAW_PILE, PLAY_PILE, GOAL_PILE, DISCARD_PILE }
 @export var type: Type = Type.DRAW_PILE
-const empty_image = preload("res://assets/graphics/cards/EMPTY.png")
-
-# TODO: introduce per instance rules
 
 ## Create a new pile. Rank ordering will be enforced when adding cards to this
 ## pile if enforce_rank_order is true.

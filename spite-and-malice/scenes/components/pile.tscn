@@ -32,8 +32,6 @@ material = SubResource("ShaderMaterial_706tr")
 scale = Vector2(0.33, 0.33)
 texture = ExtResource("2_ve17u")
 
-[node name="CardImage" type="Sprite2D" parent="."]
-
 [connection signal="area_entered" from="ClickableArea" to="." method="_on_area_entered"]
 [connection signal="area_exited" from="ClickableArea" to="." method="_on_area_exited"]
 [connection signal="mouse_entered" from="ClickableArea" to="." method="_on_mouse_entered"]
