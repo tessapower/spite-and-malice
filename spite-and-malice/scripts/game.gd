@@ -21,10 +21,12 @@ func _ready() -> void:
 
     # Deal some cards
     # TODO: this is a test, remove later
-    playing_cards.shuffle()
-    for i in range(3):
+    #playing_cards.shuffle()
+    for i in range(5):
         var card: Card = playing_cards.pop_front()
         $PlayerView.add_to_hand(card)
+        card = playing_cards.pop_front()
+        $OpponentView.add_to_hand(card)
 
 
 func _process(_delta: float) -> void:

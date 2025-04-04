@@ -31,3 +31,7 @@ func add_to_hand(card: Card) -> bool:
 
 func _sort_by_rank(a: Card, b: Card) -> bool:
     return a.rank < b.rank
+
+
+func init_goal_pile(_goal_cards: Array[Card]) -> void:
+    pass
