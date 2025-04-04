@@ -10,47 +10,54 @@ script = ExtResource("1_gkirn")
 [node name="CardSlots" type="Node" parent="."]
 
 [node name="CardSlot0" parent="CardSlots" instance=ExtResource("1_w7sap")]
-position = Vector2(1284, 432)
+position = Vector2(1244, 432)
 selectable = false
 
 [node name="CardSlot1" parent="CardSlots" instance=ExtResource("1_w7sap")]
-position = Vector2(1378, 432)
+position = Vector2(1338, 432)
 selectable = false
 
 [node name="CardSlot2" parent="CardSlots" instance=ExtResource("1_w7sap")]
-position = Vector2(1472, 432)
+position = Vector2(1432, 432)
 selectable = false
 
 [node name="CardSlot3" parent="CardSlots" instance=ExtResource("1_w7sap")]
-position = Vector2(1566, 432)
+position = Vector2(1526, 432)
 selectable = false
 
 [node name="CardSlot4" parent="CardSlots" instance=ExtResource("1_w7sap")]
-position = Vector2(1660, 432)
+position = Vector2(1620, 432)
 selectable = false
 
 [node name="DiscardPiles" type="Node" parent="."]
 
 [node name="Pile0" parent="DiscardPiles" instance=ExtResource("2_gkirn")]
-position = Vector2(1760, 624)
+position = Vector2(1704, 624)
 accepts_cards = false
 selectable = false
 type = 3
 
 [node name="Pile1" parent="DiscardPiles" instance=ExtResource("2_gkirn")]
-position = Vector2(1568, 624)
+position = Vector2(1528, 624)
 accepts_cards = false
 selectable = false
 type = 3
 
 [node name="Pile2" parent="DiscardPiles" instance=ExtResource("2_gkirn")]
-position = Vector2(1376, 624)
+position = Vector2(1352, 624)
 accepts_cards = false
 selectable = false
 type = 3
 
 [node name="Pile3" parent="DiscardPiles" instance=ExtResource("2_gkirn")]
-position = Vector2(1184, 624)
+position = Vector2(1176, 624)
 accepts_cards = false
 selectable = false
 type = 3
+
+[node name="GoalPile" parent="." instance=ExtResource("2_gkirn")]
+position = Vector2(1824, 432)
+accepts_cards = false
+selectable = false
+CARD_VERTICAL_OFFSET = Vector2(0, -1)
+type = 2

@@ -10,34 +10,40 @@ script = ExtResource("1_bhrws")
 [node name="CardSlots" type="Node" parent="."]
 
 [node name="CardSlot0" parent="CardSlots" groups=["PlayerCardSlots"] instance=ExtResource("2_fijdp")]
-position = Vector2(260, 432)
+position = Vector2(300, 432)
 
 [node name="CardSlot1" parent="CardSlots" groups=["PlayerCardSlots"] instance=ExtResource("2_fijdp")]
-position = Vector2(354, 432)
+position = Vector2(394, 432)
 
 [node name="CardSlot2" parent="CardSlots" groups=["PlayerCardSlots"] instance=ExtResource("2_fijdp")]
-position = Vector2(448, 432)
+position = Vector2(488, 432)
 
 [node name="CardSlot3" parent="CardSlots" groups=["PlayerCardSlots"] instance=ExtResource("2_fijdp")]
-position = Vector2(542, 432)
+position = Vector2(582, 432)
 
 [node name="CardSlot4" parent="CardSlots" groups=["PlayerCardSlots"] instance=ExtResource("2_fijdp")]
-position = Vector2(636, 432)
+position = Vector2(676, 432)
 
 [node name="DiscardPiles" type="Node" parent="."]
 
 [node name="Pile0" parent="DiscardPiles" instance=ExtResource("3_fijdp")]
-position = Vector2(736, 624)
+position = Vector2(744, 624)
 type = 3
 
 [node name="Pile1" parent="DiscardPiles" instance=ExtResource("3_fijdp")]
-position = Vector2(544, 624)
+position = Vector2(568, 624)
 type = 3
 
 [node name="Pile2" parent="DiscardPiles" instance=ExtResource("3_fijdp")]
-position = Vector2(352, 624)
+position = Vector2(392, 624)
 type = 3
 
 [node name="Pile3" parent="DiscardPiles" instance=ExtResource("3_fijdp")]
-position = Vector2(160, 624)
+position = Vector2(216, 624)
 type = 3
+
+[node name="GoalPile" parent="." instance=ExtResource("3_fijdp")]
+position = Vector2(96, 432)
+accepts_cards = false
+CARD_VERTICAL_OFFSET = Vector2(0, -1)
+type = 2
