@@ -1,12 +1,13 @@
 class_name Player
 extends Node2D
 
-## player.gd: a data class to hold the cards and card piles that belong to a player.
+## player.gd: a data class to hold the cards and card piles that belong to
+## the player.
 
-@onready var card_slots: Array[Node] = get_tree().get_nodes_in_group("PlayerCardSlots")
+@onready var card_slots: Array[Node] = get_node("CardSlots").get_children()
+@onready var goal_pile: Pile = get_node("GoalPile")
 
 var cards: Array[Card] = []
-
 
 func add_to_hand(card: Card) -> bool:
     if (cards.size() > GameState.MAX_IN_HAND):
