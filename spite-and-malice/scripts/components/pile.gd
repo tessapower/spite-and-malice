@@ -9,8 +9,6 @@ extends Node
 @export var accepts_cards: bool = true
 # Whether this pile is selectable by the player.
 @export var selectable: bool = true
-# Whether cards underneath the top card are visible
-@export var show_cards_in_pile: bool = false
 @export var CARD_VERTICAL_OFFSET: Vector2 = Vector2(0.0, 18.0)
 
 enum Type { DRAW_PILE, PLAY_PILE, GOAL_PILE, DISCARD_PILE }

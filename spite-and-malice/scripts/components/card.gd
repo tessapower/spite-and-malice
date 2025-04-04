@@ -32,9 +32,9 @@ func _ready() -> void:
 func init(card_rank: Rank, card_suit: Suit):
     suit = card_suit
     rank = card_rank
-    if $CardImage != null:
-        if $CardImage.texture == null:
-            $CardImage.texture = load(_image_path(suit, rank))
+    if $FrontOfCard != null:
+        if $FrontOfCard.texture == null:
+            $FrontOfCard.texture = load(_image_path(suit, rank))
 
 
 func highlight_on(color: Color) -> void:
@@ -90,3 +90,7 @@ func return_to_pile() -> void:
     if parent:
         var tween = get_tree().create_tween()
         tween.tween_property(self, "position", original_pos, 0.1)
+
+func display_back(b: bool) -> void:
+    $BackOfCard.visible = b
+

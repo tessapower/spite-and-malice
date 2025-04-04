@@ -5,6 +5,7 @@ extends Node2D
 ## at a time.
 
 @export var selectable: bool = true
+@export var visible_to_player: bool = true
 var card: Card = null
 var selected: bool = false
 
@@ -20,6 +21,8 @@ func set_card(c: Card) -> void:
     card.parent = self
     card.original_pos = position
     card.position = position
+    if !visible_to_player:
+        card.display_back(true)
 
 
 # Removes the card from this card slot and unassigns itself as the card's parent
@@ -29,6 +32,7 @@ func remove_card() -> void:
 
     card.selectable = false
     card.parent = null
+    card.display_back(false)
     card = null
 
 

@@ -12,22 +12,27 @@ script = ExtResource("1_gkirn")
 [node name="CardSlot0" parent="CardSlots" instance=ExtResource("1_w7sap")]
 position = Vector2(1244, 432)
 selectable = false
+visible_to_player = false
 
 [node name="CardSlot1" parent="CardSlots" instance=ExtResource("1_w7sap")]
 position = Vector2(1338, 432)
 selectable = false
+visible_to_player = false
 
 [node name="CardSlot2" parent="CardSlots" instance=ExtResource("1_w7sap")]
 position = Vector2(1432, 432)
 selectable = false
+visible_to_player = false
 
 [node name="CardSlot3" parent="CardSlots" instance=ExtResource("1_w7sap")]
 position = Vector2(1526, 432)
 selectable = false
+visible_to_player = false
 
 [node name="CardSlot4" parent="CardSlots" instance=ExtResource("1_w7sap")]
 position = Vector2(1620, 432)
 selectable = false
+visible_to_player = false
 
 [node name="DiscardPiles" type="Node" parent="."]
 
