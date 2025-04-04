@@ -32,9 +32,6 @@ func _ready() -> void:
 func init(card_rank: Rank, card_suit: Suit):
     suit = card_suit
     rank = card_rank
-
-
-func _process(_delta) -> void:
     if $CardImage != null:
         if $CardImage.texture == null:
             $CardImage.texture = load(_image_path(suit, rank))
