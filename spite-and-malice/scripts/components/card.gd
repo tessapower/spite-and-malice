@@ -91,6 +91,8 @@ func return_to_pile() -> void:
     if parent:
         var tween = get_tree().create_tween()
         tween.tween_property(self, "position", original_pos, 0.1)
+        tween.tween_property(self, "scale", NORMAL_SCALE, 0.1)
+
 
 func display_back(b: bool) -> void:
     $BackOfCard.visible = b

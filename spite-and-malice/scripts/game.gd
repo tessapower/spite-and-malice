@@ -88,6 +88,8 @@ func start_dragging_card(mouse_pos: Vector2) -> void:
     tween.tween_property(GameState.selected_card, "position", Vector2(
         clamp(mouse_pos.x, 0, window_size.x),
         clamp(mouse_pos.y, 0, window_size.y)), 0.025)
+    tween.tween_property(GameState.selected_card, "scale",
+        GameState.selected_card.DRAG_SCALE, 0.1)
     dragging = true
 
     GameState.selected_card.drag(dragging)
