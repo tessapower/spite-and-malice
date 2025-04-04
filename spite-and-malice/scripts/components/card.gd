@@ -9,23 +9,24 @@ enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES, NONE }
 enum Rank { ACE = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN,
             JACK, QUEEN, KING, JOKER }
 
+# Card constants
+const NORMAL_SCALE: Vector2 = Vector2(1.0, 1.0)
+const NORMAL_Z_IDX: int = 2
+const HOVERED_SCALE: Vector2 = Vector2(1.05, 1.05)
+const HOVERED_Z_IDX: int = RenderingServer.CANVAS_ITEM_Z_MAX
+const DRAG_SCALE: Vector2 = Vector2(1.25, 1.25)
+const DRAG_Z_IDX: int = RenderingServer.CANVAS_ITEM_Z_MAX
+
 # Card Variables
 var rank: Rank = Rank.ACE
 var suit: Suit = Suit.SPADES
 var selectable: bool = false
 var parent = null
 var original_pos: Vector2 = Vector2(0.0, 0.0)
-
-# Card constants
-const NORMAL_SCALE: Vector2 = Vector2(1.0, 1.0)
-const NORMAL_Z_IDX: int = 2
-const HOVERED_SCALE: Vector2 = Vector2(1.05, 1.05)
-const HOVERED_Z_IDX: int = 3
-const DRAG_SCALE: Vector2 = Vector2(1.0, 1.0)
-const DRAG_Z_IDX: int = RenderingServer.CANVAS_ITEM_Z_MAX
+var original_z_idx: int = NORMAL_Z_IDX
 
 func _ready() -> void:
-    z_index = NORMAL_Z_IDX
+    z_index = original_z_idx
     scale = NORMAL_SCALE
 
 # Set up card data
@@ -47,12 +48,12 @@ func highlight_off() -> void:
 
 func hover(should_highlight: bool) -> void:
     scale = HOVERED_SCALE if should_highlight else NORMAL_SCALE
-    z_index = HOVERED_Z_IDX if should_highlight else NORMAL_Z_IDX
+    z_index = HOVERED_Z_IDX if should_highlight else original_z_idx
 
 
 func drag(is_being_dragged: bool) -> void:
     scale = DRAG_SCALE if is_being_dragged else NORMAL_SCALE
-    z_index = DRAG_Z_IDX if is_being_dragged else NORMAL_Z_IDX
+    z_index = DRAG_Z_IDX if is_being_dragged else original_z_idx
 
 
 func _image_path(s: Suit, r: Rank) -> String:

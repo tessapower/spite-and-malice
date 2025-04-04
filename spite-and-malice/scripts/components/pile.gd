@@ -36,10 +36,11 @@ func add(c: Card) -> void:
         c.selectable = selectable
         c.parent = self
 
-        # Set newly pushed card's z ordering so that it appears on the top
-        # of the stack
         if !is_empty():
-            c.z_index = cards.peek().z_index + 1
+            # Set newly pushed card's z ordering so that it appears on the top
+            # of the stack
+            c.original_z_idx = cards.peek().z_index + 1
+            c.z_index = c.original_z_idx
 
         # Set position based on position in pile
         var pos: Vector2 = (cards.size() * CARD_VERTICAL_OFFSET)
@@ -62,6 +63,7 @@ func pop_top_card() -> Card:
         return null
 
     var card = cards.pop()
+    # Reset card's z ordering
     card.z_index = Card.NORMAL_Z_IDX
 
 
