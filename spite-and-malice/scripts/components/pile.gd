@@ -98,7 +98,7 @@ func _on_mouse_exited() -> void:
 
 func _on_area_entered(area: Area2D) -> void:
     var c := area.get_parent() as Card
-    if c && c.parent != self:
+    if c && c.parent != self && accepts_cards:
         if GameState.selected_card:
             if RulesManager.is_legal_move(GameState.selected_card, self):
                 GameState.dest_pile = self
