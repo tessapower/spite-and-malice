@@ -97,3 +97,12 @@ func return_to_pile() -> void:
 func display_back(b: bool) -> void:
     $BackOfCard.visible = b
 
+
+func _on_mouse_entered() -> void:
+    if selectable:
+        hover(true)
+
+
+func _on_mouse_exited() -> void:
+    if selectable:
+        hover(false)

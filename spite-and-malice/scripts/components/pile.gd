@@ -37,6 +37,8 @@ func add(c: Card) -> void:
         c.parent = self
 
         if !is_empty():
+            # Ensure cards underneath this new one are not selectable
+            cards.peek().selectable = false
             # Set newly pushed card's z ordering so that it appears on the top
             # of the stack
             c.original_z_idx = cards.peek().z_index + 1
@@ -65,6 +67,13 @@ func pop_top_card() -> Card:
     var card = cards.pop()
     # Reset card's z ordering
     card.z_index = Card.NORMAL_Z_IDX
+    # Reset this card's ability to be selected
+    card.selectable = true
+
+    if !is_empty() && selectable:
+        # Set whether the top card is selectable based on this pile's ability
+        # to be selected
+        cards.peek().selectable = selectable
 
 
     return card

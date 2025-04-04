@@ -43,7 +43,7 @@ func _input(event) -> void:
 
         if node is CardSlot:
             var card_slot: CardSlot = node
-            if card_slot.card:
+            if card_slot.selectable && card_slot.card:
                 GameState.select_card(card_slot.card)
         elif node is Pile:
             var pile: Pile = node

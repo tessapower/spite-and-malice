@@ -28,3 +28,5 @@ z_index = 4096
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_phura")
 
+[connection signal="mouse_entered" from="ClickableArea" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ClickableArea" to="." method="_on_mouse_exited"]

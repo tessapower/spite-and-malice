@@ -17,7 +17,7 @@ func set_card(c: Card) -> void:
     if card == c: return
 
     card = c
-    card.selectable = true
+    card.selectable = selectable
     card.parent = self
     card.original_pos = position
     card.position = position
